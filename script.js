@@ -9,6 +9,7 @@ function readyNow() {
 function clickSubmit() {
   //   let firstName = $("#input-first-name").submit("");
   console.log("works");
-  let addFirstName = $("#input-first-name").val();
-  $("#employ-first-name").append(addFirstName);
+  //   let addFirstName = $("#input-first-name").val();
+
+  $("#input-first-name").append($("#employ-first-name").val());
 }
