@@ -1,30 +1,39 @@
 $(document).ready(readyNow);
 
+let count = 0;
+let employees = [];
+
 function readyNow() {
   console.log("is working");
   $("#submit-button").on("click", function () {
     clickSubmit();
+    addRow(employees[employees.length - 1]);
+    $(".delete-" + count).on("click", function () {
+      let rowId = this.getAttribute("class");
+      console.log("type", typeof rowId);
+      console.log("Anything I want");
+      deleteRow(rowId.substring(7));
+    });
+    count++;
   });
 }
 
-let count = 0;
-
 function clickSubmit() {
-  //   let firstName = $("#input-first-name").submit("");
-  console.log("works");
-  //   let addFirstName = $("#input-first-name").val();
-  $("#employ-first-name").text($("#input-first-name").val());
-  $("#employ-last-name").text($("#input-second-name").val());
-  $("#employ-num").text($("#input-id").val());
-  $("#employ-title").text($("#input-title").val());
-  $("#employ-salary").text($("#input-salary").val());
-
-  let firstName = $("#input-first-name");
-  let lastName = $("#input-second-name");
-  let idNum = $("#input-id");
-  let title = $("#input-title");
-  let salary = $("#input-salary");
-
+  let employee = {
+    firstName: $("#input-first-name").val(),
+    lastName: $("#input-second-name").val(),
+    idNum: $("#input-id").val(),
+    title: $("#input-title").val(),
+    salary: $("#input-salary").val(),
+  };
+  $("#input-first-name").val("");
+  $("#input-second-name").val("");
+  $("#input-id").val("");
+  $("#input-title").val("");
+  $("#input-salary").val("");
+  employees.push(employee);
+}
+function addRow(employee) {
   let tableRow = $("<tr></tr>");
   tableRow.addClass("table-row-" + count);
   let firstNameTD = $("<td></td>");
@@ -35,21 +44,22 @@ function clickSubmit() {
   let deleteTD = $("<td></td>");
   let deleteButton = $("<button></button>");
   deleteButton.addClass("delete-" + count);
-  count++;
 
   deleteButton.text("Delete");
   deleteTD.append(deleteButton);
 
-  firstNameTD.text(firstName.val());
-  lastNameTD.text(lastName.val());
-  idTD.text(idNum.val());
-  titleTD.text(title.val());
-  salaryTD.text(salary.val());
+  firstNameTD.text(employee.firstName);
+  lastNameTD.text(employee.lastName);
+  idTD.text(employee.idNum);
+  titleTD.text(employee.title);
+  salaryTD.text(employee.salary);
 
   tableRow.append(firstNameTD, lastNameTD, idTD, titleTD, salaryTD, deleteTD);
   $(".table-data").append(tableRow);
 }
-function deleteRow() {}
+function deleteRow(rowID) {
+  $(`.table-row-${rowID}`).remove();
+}
 
 {
   /* <tr class="employ-data">
