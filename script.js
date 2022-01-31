@@ -70,3 +70,6 @@ function deleteRow(rowID) {
 <td id="employ-salary"></td>
 </tr> */
 }
+if ($("#input-salary").on(clickSubmit()) > 20000) {
+  $(".table-data").css({ "background-color": "red" });
+}
